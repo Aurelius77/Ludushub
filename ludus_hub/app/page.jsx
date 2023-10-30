@@ -1,13 +1,13 @@
 import Navbar from './components/Navbar.jsx'
-//import { useEffect, useState } from 'react'
+import Body from './components/Body.jsx'
 
-export default function Home({gameData}) {
+export default function Home() {
   
-   
 
   return (
     <>
     <Navbar/>
+    <Body/>
     </>
   )
 
