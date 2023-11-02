@@ -17,7 +17,7 @@ function Platform(){
     <Navbar/>
     <main className="flex items-start">
     <Sidebar/>
-     {games.length > 0 ? <div className="w-full">
+     {games && games.length > 0 ? <div className="w-full">
       <h1 className="text-2xl font-bold">{`Top Games from ${name}`}</h1>
     <div className="flex flex-wrap w-full">
       {games.map((game) => (
