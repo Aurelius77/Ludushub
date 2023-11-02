@@ -8,7 +8,7 @@ import Loader from "@/app/components/Loader"
 function Publisher(){
    const {state} = useGlobalState()
    const publisherData = state.data || {}
-   const {games, name, image_background} =  publisherData.data
+   const {games, name, image_background} =  publisherData.data || {}
 
 
    return(
@@ -16,11 +16,10 @@ function Publisher(){
     <Navbar/>
     <main className="flex items-start">
     <Sidebar/>
-    <div className="w-full">
+    {games.length > 0 ? <div className="w-full">
       <h1 className="text-2xl font-bold">{`Top Games from ${name}`}</h1>
     <div className="flex flex-wrap w-full">
-    {games.length > 0 ? (
-      games.map((game) => (
+      {games.map((game) => (
         <div className="w-full md:w-1/2 lg:w-1/4 p-3" key={game.id}>
           <div className="border rounded-md shadow-lg mb-3">
             <div className="rounded-md overflow-hidden">
@@ -33,12 +32,10 @@ function Publisher(){
             <h1 className="text-xl mt-2 mb-2 p-3">{game.name}</h1>
           </div>
           </div>
-      ))
-    ) : (
-      <Loader/>
-    )}
+      ))}
+   
     </div>
-  </div>
+  </div> : <Loader/>}
   </main>
     </>
    )
