@@ -2,23 +2,22 @@
 import Sidebar from "../components/Sidebar"
 import Navbar from "../components/Navbar"
 import { useEffect, useState } from "react"
+import { fetchDataFromAPI } from "../http/api"
+import { useGlobalState } from "../context/context"
+import Link from "next/link"
+import Loader from "../components/Loader"
 
-
-async function getData(url){
-    const res = await fetch(url)
-    return res.json()
-  
-}
 
 export default function Publishers(){
 
-
+ const {dispatch} = useGlobalState()
+ const apiKey = process.env.API_KEY
     const [publisher, setPublishers] = useState([])
 
     useEffect(() => {
       async function fetchData(){
         try{
-          const result = await getData('https://api.rawg.io/api/publishers?key=79e0a5510adc4ea3904640b7b74a1290')
+          const result = await fetchDataFromAPI(`https://api.rawg.io/api/publishers?key=${apiKey}`)
           console.log(result.results)
           setPublishers(result.results)
         }
@@ -29,6 +28,16 @@ export default function Publishers(){
       fetchData()
     
     }, [])
+
+    function setPublisherDataInGlobalState(publisherId, gamesData){
+    dispatch({
+      type: 'SET_DATA',
+      payload: {
+        publisherId: publisherId,
+        data: gamesData,
+      },
+    });
+  };
     
     return(
         <>
@@ -38,7 +47,15 @@ export default function Publishers(){
   <div className="flex flex-wrap w-full">
     {publisher.length > 0 ? (
       publisher.map((publisher) => (
-        <div key={publisher.id} className="w-full md:w-1/2 lg:w-1/4 p-3">
+        <Link href={{
+          pathname: '/publishers/publisher',
+          query: {
+            data: publisher.id
+          }
+        }}  className="w-full md:w-1/2 lg:w-1/4 p-3"
+         key={publisher.id}
+         onClick={()=>setPublisherDataInGlobalState(publisher.id, publisher)}
+         >
           <div className="border rounded-md shadow-lg mb-3">
             <div className="rounded-md overflow-hidden">
               <img
@@ -49,10 +66,10 @@ export default function Publishers(){
             </div>
             <h1 className="text-xl mt-2 mb-2 p-3">{publisher.name}</h1>
           </div>
-        </div>
+        </Link>
       ))
     ) : (
-      <p>No publishers available</p>
+      <Loader/>
     )}
   </div>
 </main>

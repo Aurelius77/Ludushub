@@ -2,7 +2,8 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
-export default function Sidebar(){
+export default function Sidebar({visibility}){
+
 
     const SidebarRoutes = [
       {
@@ -16,11 +17,6 @@ export default function Sidebar(){
       },
 
       {
-        name : 'Platforms',
-        route : '/platforms'
-      },
-
-      {
         name : 'Wishlist',
         route : '/wishlist'
       },
@@ -28,6 +24,11 @@ export default function Sidebar(){
       {
         name : 'Favourites',
         route : '/favourites'
+      },
+
+      {
+        name : 'Platforms',
+        route : '/platforms'
       },
 
       {
@@ -55,8 +56,8 @@ export default function Sidebar(){
       },
 
       {
-        name : 'Date',
-        route : '/date'
+        name : 'Stores',
+        route : '/stores'
       }
 
     ]
@@ -65,8 +66,8 @@ export default function Sidebar(){
 
     return(
         <>
-       <nav className='p-3'>
-         <ul className="hidden md:flex flex-col m-3 cursor-pointer">
+       <nav className={`sm:${visibility ? 'absolute top-0 left-0 z-40 w-full h-screen p-4  transition-transform -translate-x-full' : ''}p-3`}>
+         <ul className={`sm: ${visibility ? 'flex flex-col m-3 cursor-pointer': 'hidden' } md:flex flex-col m-3 cursor-pointer`}>
            {SidebarRoutes.map((link, index)=>{
             return <Link key={index} href={link.route}><li className={`p-3 m-3 text-xl ${currentPath === link.route ? 'border-b border-b-cyan-400 font-bold' : ''}`}>
             {link.name}</li></Link>

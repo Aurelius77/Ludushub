@@ -1,5 +1,6 @@
 import { inter, lusitana } from './ui/fonts'
 import './globals.css'
+import GlobalStateProvider from './context/context'
 
 
 export const metadata = {
@@ -10,7 +11,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={lusitana.className}>{children}</body>
+      <body className={lusitana.className}>
+        <GlobalStateProvider>
+          {children}
+        </GlobalStateProvider>
+      </body>
     </html>
   )
 }

@@ -3,21 +3,20 @@ import Sidebar from "../components/Sidebar"
 import Navbar from "../components/Navbar"
 import { useEffect, useState } from "react"
 import { fetchDataFromAPI } from "../http/api"
-import { useGlobalState } from "../context/context"
 import Link from "next/link"
 import Loader from "../components/Loader"
 
-export default function Genres(){
-const apiKey = process.env.API_KEY
-const {dispatch} = useGlobalState()
 
-    const [genre, setGenres] = useState([])
+export default function stores(){
+const apiKey = process.env.API_KEY
+
+    const [stores, setstores] = useState([])
 
     useEffect(() => {
       async function fetchData(){
         try{
-          const result = await fetchDataFromAPI(`https://api.rawg.io/api/genres?key=${apiKey}`)
-          setGenres(result.results)
+          const result = await fetchDataFromAPI(`https://api.rawg.io/api/stores?key=${apiKey}`)
+          setstores(result.results)
         }
         catch(err){
             console.log(err)
@@ -27,15 +26,6 @@ const {dispatch} = useGlobalState()
     
     }, [])
 
-    function setgenresDataInGlobalState(genreId, gamesData){
-    dispatch({
-      type: 'SET_DATA',
-      payload: {
-        genreId: genreId,
-        data: gamesData,
-      },
-    });
-  };
     
     return(
         <>
@@ -43,26 +33,21 @@ const {dispatch} = useGlobalState()
       <main className="flex">
   <Sidebar />
   <div className="flex flex-wrap w-full">
-    {genre.length > 0 ? (
-      genre.map((genre) => (
-       <Link href={{
-          pathname: '/genres/genre',
-          query: {
-            data: genre.id
-          }
-        }}  className="w-full md:w-1/2 lg:w-1/4 p-3"
-         key={genre.id}
-         onClick={()=>setgenresDataInGlobalState(genre.id, genre)}
+    {stores.length > 0 ? (
+      stores.map((store) => (
+       <Link href={`https://${store.domain}`}
+           className="w-full md:w-1/2 lg:w-1/4 p-3"
+         key={store.id}
          >
           <div className="border rounded-md shadow-lg mb-3">
             <div className="rounded-md overflow-hidden">
               <img
-                src={genre.image_background}
-                alt={genre.name}
+                src={store.image_background}
+                alt={store.name}
                 className="w-full h-40 object-cover"
               />
             </div>
-            <h1 className="text-xl mt-2 mb-2 p-3">{genre.name}</h1>
+            <h1 className="text-xl mt-2 mb-2 p-3">{store.name}</h1>
           </div>
         </Link>
       ))

@@ -4,10 +4,11 @@ import profile from '../../public/assets/profile.png'
 import searchbtn from '../../public/assets/search.svg'
 import menu from '../../public/assets/menu.svg'
 import { useState, useEffect } from 'react'
-import Link from 'next/link'
+import Link from "next/link"
+import { usePathname } from "next/navigation"
 
 
-export default function Navbar({onSearch}){
+export default function Navbar({onSearch, toggleSidebar}){
    const [searchInput, setSearchInput] = useState('')
 
  
@@ -29,6 +30,69 @@ export default function Navbar({onSearch}){
   }
 
 
+    const SidebarRoutes = [
+      {
+        name : 'Home',
+        route : '/'
+      },
+
+      {
+        name : 'Profile',
+        route : '/profile'
+      },
+
+      {
+        name : 'Wishlist',
+        route : '/wishlist'
+      },
+
+      {
+        name : 'Favourites',
+        route : '/favourites'
+      },
+
+      {
+        name : 'Platforms',
+        route : '/platforms'
+      },
+
+      {
+        name : 'Publishers',
+        route : '/publishers'
+      },
+
+      {
+        name : 'Tags',
+        route : '/tags'
+      },
+      {
+        name : 'Genres',
+        route : '/genres'
+      },
+
+      {
+        name : 'Game trailers',
+        route : '/trailers'
+      },
+
+      {
+        name : 'Metacritic',
+        route : '/ratings'
+      },
+
+      {
+        name : 'Date',
+        route : '/date'
+      }
+
+    ]
+
+    const currentPath = usePathname()
+
+  
+
+
+
     return(
         <>
         <nav className='p-3 flex items-center w-full justify-between mb-5'>
@@ -45,7 +109,7 @@ export default function Navbar({onSearch}){
       </div>
       <div className="right flex items-center w-1/3 cursor-pointer">
                   <Image src={profile} alt='login' className='hidden md:block ml-auto mr-5'/>
-          <Image src={menu} className='block md:hidden ml-auto mr-5' alt='menu'/>
+          <Image src={menu} className='block md:hidden ml-auto mr-5' alt='menu' onClick={toggleSidebar}/>
         </div>
       </nav>
         </>
