@@ -21,7 +21,7 @@ function Genre(){
     <div className="flex flex-wrap w-full">
     {games.length > 0 ? (
       games.map((game) => (
-        <div className="w-full md:w-1/2 lg:w-1/4 p-3">
+        <div className="w-full md:w-1/2 lg:w-1/4 p-3" key={game.id}>
           <div className="border rounded-md shadow-lg mb-3">
             <div className="rounded-md overflow-hidden">
               <img
