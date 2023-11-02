@@ -13,6 +13,11 @@ export default function Publishers(){
  const {dispatch} = useGlobalState()
  const apiKey = process.env.API_KEY
     const [publisher, setPublishers] = useState([])
+    const [sidebarVisibilty, setSidebarVisibility] = useState(false)
+
+   function toggleSidebar(){
+    setSidebarVisibility(!sidebarVisibilty)
+   }
 
     useEffect(() => {
       async function fetchData(){
@@ -41,10 +46,10 @@ export default function Publishers(){
     
     return(
         <>
-        <Navbar/>
+        <Navbar toggleSidebar={toggleSidebar}/>
       <main className="flex">
-  <Sidebar />
-  <div className="flex flex-wrap w-full">
+  <Sidebar visibility={sidebarVisibilty}/>
+  {!sidebarVisibilty ? <div className="flex flex-wrap w-full">
     {publisher.length > 0 ? (
       publisher.map((publisher) => (
         <Link href={{
@@ -71,7 +76,7 @@ export default function Publishers(){
     ) : (
       <Loader/>
     )}
-  </div>
+  </div> : ''}
 </main>
 </>
 

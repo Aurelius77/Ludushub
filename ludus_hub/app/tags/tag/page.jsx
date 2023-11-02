@@ -6,15 +6,16 @@ import Loader from "@/app/components/Loader"
 import { useState } from "react"
 
 
-function Publisher(){
+function Tag(){
    const {state} = useGlobalState()
-   const publisherData = state.data || {}
-   const {games, name, image_background} =  publisherData.data || {}
+   const TagData = state.data || {}
+   const {games, name, image_background} =  TagData.data || {}
    const [sidebarVisibilty, setSidebarVisibility] = useState(false)
 
    function toggleSidebar(){
     setSidebarVisibility(!sidebarVisibilty)
    }
+
 
    return(
     <>
@@ -47,4 +48,4 @@ function Publisher(){
   
 }
 
-export default Publisher
+export default Tag

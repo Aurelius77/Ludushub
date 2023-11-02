@@ -11,6 +11,11 @@ export default function Stores(){
 const apiKey = process.env.API_KEY
 
     const [stores, setstores] = useState([])
+    const [sidebarVisibilty, setSidebarVisibility] = useState(false)
+
+   function toggleSidebar(){
+    setSidebarVisibility(!sidebarVisibilty)
+   }
 
     useEffect(() => {
       async function fetchData(){
@@ -29,10 +34,10 @@ const apiKey = process.env.API_KEY
     
     return(
         <>
-        <Navbar/>
+        <Navbar toggleSidebar={toggleSidebar}/>
       <main className="flex">
-  <Sidebar />
-  <div className="flex flex-wrap w-full">
+  <Sidebar visibility={sidebarVisibilty}/>
+  {!sidebarVisibilty ? <div className="flex flex-wrap w-full">
     {stores.length > 0 ? (
       stores.map((store) => (
        <Link href={`https://${store.domain}`}
@@ -54,7 +59,7 @@ const apiKey = process.env.API_KEY
     ) : (
       <Loader/>
     )}
-  </div>
+  </div> : ''}
 </main>
 </>
 

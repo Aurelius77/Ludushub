@@ -46,11 +46,6 @@ export default function Sidebar({visibility}){
       },
 
       {
-        name : 'Game trailers',
-        route : '/trailers'
-      },
-
-      {
         name : 'Metacritic',
         route : '/ratings'
       },

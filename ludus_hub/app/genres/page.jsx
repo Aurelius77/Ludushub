@@ -12,6 +12,12 @@ const apiKey = process.env.API_KEY
 const {dispatch} = useGlobalState()
 
     const [genre, setGenres] = useState([])
+    const [sidebarVisibilty, setSidebarVisibility] = useState(false)
+
+    function toggleSidebar(){
+      setSidebarVisibility(!sidebarVisibilty)
+      console.log(sidebarVisibilty)
+    }
 
     useEffect(() => {
       async function fetchData(){
@@ -39,10 +45,10 @@ const {dispatch} = useGlobalState()
     
     return(
         <>
-        <Navbar/>
+        <Navbar toggleSidebar = {toggleSidebar}/>
       <main className="flex">
-  <Sidebar />
-  <div className="flex flex-wrap w-full">
+  <Sidebar visibility = {sidebarVisibilty}/>
+  {!sidebarVisibilty ? <div className="flex flex-wrap w-full">
     {genre.length > 0 ? (
       genre.map((genre) => (
        <Link href={{
@@ -69,7 +75,7 @@ const {dispatch} = useGlobalState()
     ) : (
       <Loader/>
     )}
-  </div>
+  </div> : ''}
 </main>
 </>
 

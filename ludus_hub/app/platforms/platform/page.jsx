@@ -3,21 +3,26 @@ import { useGlobalState } from "@/app/context/context"
 import Navbar from "@/app/components/Navbar"
 import Sidebar from "@/app/components/Sidebar"
 import Loader from "@/app/components/Loader"
+import { useState } from "react"
 
 
 function Platform(){
    const {state} = useGlobalState()
    const platformData = state.data || {}
    const {games, name, image_background} =  platformData.data || {}
-   console.log(games, name, image_background)
+   const [sidebarVisibilty, setSidebarVisibility] = useState(false)
+
+   function toggleSidebar(){
+    setSidebarVisibility(!sidebarVisibilty)
+   }
 
 
    return(
     <>
-    <Navbar/>
+     <Navbar toggleSidebar={toggleSidebar}/>
     <main className="flex items-start">
-    <Sidebar/>
-     {games && games.length > 0 ? <div className="w-full">
+    <Sidebar visibility={sidebarVisibilty}/>
+    {!sidebarVisibilty && games && games.length > 0 ? <div className="w-full">
       <h1 className="text-2xl font-bold">{`Top Games from ${name}`}</h1>
     <div className="flex flex-wrap w-full">
       {games.map((game) => (
@@ -36,7 +41,7 @@ function Platform(){
       ))}
    
     </div>
-  </div> : <Loader/>}
+  </div> : sidebarVisibilty ? '' : <Loader/>}
   </main>
     </>
    )
