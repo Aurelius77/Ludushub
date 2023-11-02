@@ -7,7 +7,7 @@ import Loader from "@/app/components/Loader"
 
 function Platform(){
    const {state} = useGlobalState()
-   const platformData = state.data
+   const platformData = state.data || {}
    const {games, name, image_background} =  platformData.data
    console.log(games, name, image_background)
 

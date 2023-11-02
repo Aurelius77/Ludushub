@@ -7,7 +7,7 @@ import Loader from "@/app/components/Loader"
 
 function Publisher(){
    const {state} = useGlobalState()
-   const publisherData = state.data
+   const publisherData = state.data || {}
    const {games, name, image_background} =  publisherData.data
 
 

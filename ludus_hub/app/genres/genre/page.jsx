@@ -7,7 +7,7 @@ import Loader from "@/app/components/Loader"
 
 function Genre(){
    const {state} = useGlobalState()
-   const genreData = state.data
+   const genreData = state.data || {}
    const {games, name, image_background} =  genreData.data
 
 
