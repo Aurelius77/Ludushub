@@ -7,7 +7,7 @@ import Link from "next/link"
 import Loader from "../components/Loader"
 
 
-export default function stores(){
+export default function Stores(){
 const apiKey = process.env.API_KEY
 
     const [stores, setstores] = useState([])
