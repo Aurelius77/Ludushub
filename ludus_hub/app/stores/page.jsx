@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 import { fetchDataFromAPI } from "../http/api"
 import Link from "next/link"
 import Loader from "../components/Loader"
+import SidebarCard from "../components/SidebarCard"
 
 
 export default function Stores(){
@@ -44,16 +45,7 @@ const apiKey = process.env.API_KEY
            className="w-full md:w-1/2 lg:w-1/4 p-3"
          key={store.id}
          >
-          <div className="border rounded-md shadow-lg mb-3">
-            <div className="rounded-md overflow-hidden">
-              <img
-                src={store.image_background}
-                alt={store.name}
-                className="w-full h-40 object-cover"
-              />
-            </div>
-            <h1 className="text-xl mt-2 mb-2 p-3">{store.name}</h1>
-          </div>
+          <SidebarCard props = {store} isShowing= {false}/>
         </Link>
       ))
     ) : (

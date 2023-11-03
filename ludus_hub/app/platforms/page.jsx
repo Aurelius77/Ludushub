@@ -6,6 +6,7 @@ import { fetchDataFromAPI } from "../http/api"
 import { useGlobalState } from "../context/context"
 import Link from "next/link"
 import Loader from "../components/Loader"
+import SidebarCard from "../components/SidebarCard"
 
 
 export default function Platforms(){
@@ -62,16 +63,7 @@ const {dispatch} = useGlobalState()
          key={platform.id}
          onClick={()=>setPlatformsDataInGlobalState(platform.id, platform)}
          >
-          <div className="border rounded-md shadow-lg mb-3">
-            <div className="rounded-md overflow-hidden">
-              <img
-                src={platform.image_background}
-                alt={platform.name}
-                className="w-full h-40 object-cover"
-              />
-            </div>
-            <h1 className="text-xl mt-2 mb-2 p-3">{platform.name}</h1>
-          </div>
+          <SidebarCard props ={platform} isShowing={false}/>
         </Link>
       ))
     ) : (

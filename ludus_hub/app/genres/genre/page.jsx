@@ -4,6 +4,7 @@ import Navbar from "@/app/components/Navbar"
 import Sidebar from "@/app/components/Sidebar"
 import Loader from "@/app/components/Loader"
 import { useState } from "react"
+import SidebarCard from "@/app/components/SidebarCard"
 
 
 function Genre(){
@@ -28,16 +29,7 @@ function Genre(){
     <div className="flex flex-wrap w-full">
       {games.map((game) => (
         <div className="w-full md:w-1/2 lg:w-1/4 p-3" key={game.id}>
-          <div className="border rounded-md shadow-lg mb-3">
-            <div className="rounded-md overflow-hidden">
-              <img
-                src={image_background}
-                alt={game.name}
-                className="w-full h-40 object-cover"
-              />
-            </div>
-            <h1 className="text-xl mt-2 mb-2 p-3">{game.name}</h1>
-          </div>
+          <SidebarCard props = {game} image ={image_background} isShowing={true}/>
           </div>
       ))}
    

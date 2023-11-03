@@ -6,6 +6,7 @@ import { fetchDataFromAPI } from "../http/api"
 import { useGlobalState } from "../context/context"
 import Link from "next/link"
 import Loader from "../components/Loader"
+import SidebarCard from "../components/SidebarCard"
 
 
 export default function Tags(){
@@ -61,16 +62,7 @@ export default function Tags(){
          key={tag.id}
          onClick={()=>setTagDataInGlobalState(tag.id, tag)}
          >
-          <div className="border rounded-md shadow-lg mb-3">
-            <div className="rounded-md overflow-hidden">
-              <img
-                src={tag.image_background}
-                alt={tag.name}
-                className="w-full h-40 object-cover"
-              />
-            </div>
-            <h1 className="text-xl mt-2 mb-2 p-3">{tag.name}</h1>
-          </div>
+         <SidebarCard props = {tag} isShowing ={false}/>
         </Link>
       ))
     ) : (

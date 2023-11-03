@@ -6,6 +6,11 @@ import { fetchDataFromAPI } from "../http/api"
 import { useGlobalState } from "../context/context"
 import Link from "next/link"
 import Loader from "../components/Loader"
+import { HeartIcon } from "@heroicons/react/24/solid";
+import SidebarCard from "../components/SidebarCard"
+
+
+
 
 export default function Genres(){
 const apiKey = process.env.API_KEY
@@ -42,6 +47,7 @@ const {dispatch} = useGlobalState()
       },
     });
   };
+
     
     return(
         <>
@@ -60,16 +66,7 @@ const {dispatch} = useGlobalState()
          key={genre.id}
          onClick={()=>setgenresDataInGlobalState(genre.id, genre)}
          >
-          <div className="border rounded-md shadow-lg mb-3">
-            <div className="rounded-md overflow-hidden">
-              <img
-                src={genre.image_background}
-                alt={genre.name}
-                className="w-full h-40 object-cover"
-              />
-            </div>
-            <h1 className="text-xl mt-2 mb-2 p-3">{genre.name}</h1>
-          </div>
+          <SidebarCard props = {genre} isShowing={false}/>
         </Link>
       ))
     ) : (
