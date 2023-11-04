@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { HeartIcon } from "@heroicons/react/24/solid";
 import { useState } from 'react';
 
-export default function Card({props}){
+export default function Card({props, isSelected, handleIconClick}){
    const [isClicked, setIsClicked] = useState(false);
 
 function getPlatformImage(platformName) {
@@ -28,6 +28,9 @@ function getPlatformImage(platformName) {
 
 function handleHeartClick(){
   setIsClicked(!isClicked)
+  if (typeof handleIconClick === 'function') {
+    handleIconClick(props.id);
+  }
 }
 
     return(
@@ -40,7 +43,7 @@ function handleHeartClick(){
         alt=""
         className="w-full h-40 object-cover"
       />
-      <HeartIcon className={`h-6 w-6 absolute right-2 top-2 cursor-pointer ${isClicked ? 'text-red-500' : ''}`} onClick={handleHeartClick}/>
+      <HeartIcon className={`h-6 w-6 absolute right-2 top-2 cursor-pointer  ${isSelected || isClicked ? 'text-red-500' : ''}`}  onClick={handleHeartClick}/>
     </div>
     <div className="game-info p-3 flex items-center justify-between">
       <ul className="flex items-center">

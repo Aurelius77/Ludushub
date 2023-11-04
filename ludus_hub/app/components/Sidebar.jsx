@@ -16,10 +16,6 @@ export default function Sidebar({visibility}){
         route : '/profile'
       },
 
-      {
-        name : 'Wishlist',
-        route : '/wishlist'
-      },
 
       {
         name : 'Favourites',
