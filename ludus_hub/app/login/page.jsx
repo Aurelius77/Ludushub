@@ -41,11 +41,11 @@ export default function Login(){
          <label>Password:</label>
              <div className='relative w-full'>
          <input type={isPassword ? 'password' : 'text'} placeholder='Enter your password' className='p-3 mb-3 border rounded-md w-full' required/>
-         <EyeIcon className=' h-6 w-6 cursor-pointer absolute top-1/2 right-2 -transform -translate-y-1/2' onClick={handleEyeClick}/>
+         <EyeIcon className='h-6 w-6 cursor-pointer absolute top-1/2 right-2 -transform -translate-y-1/2' onClick={handleEyeClick}/>
               </div>
          <button className='bg-black text-cyan-400 rounded-md p-3 mb-3'>Login</button>
            <div className=' block md:flex justify-between items-center'>
-              <p>Don't have an account yet? <Link className='text-blue-400 underline' href='/login/register'>Register</Link></p>
+              <p>Dont have an account yet? <Link href='/login/register'><span className='text-blue-400 underline' >Register</span></Link></p>
               <Link href='/login/forgot_password'><p className='text-blue-400 underline'>Forgot password?</p></Link>
            </div>
       </form>

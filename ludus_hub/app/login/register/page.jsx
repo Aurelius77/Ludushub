@@ -49,7 +49,7 @@ export default function Register(){
 
          <button className='bg-black text-cyan-400 rounded-md p-3 mb-3'>Register</button>
            <div className=' block md:flex justify-between items-center'>
-              <p>Already have an account?<Link className='text-blue-400 underline' href='/login'>Register</Link></p>
+                           <p>Already have an account yet? <Link href='/login/register'><span className='text-blue-400 underline' >Login</span></Link></p>
               <Link href='/login/forgot_password'><p className='text-blue-400 underline'>Forgot password?</p></Link>
            </div>
       </form>
