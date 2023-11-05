@@ -19,7 +19,7 @@ export default function Game(){
    useEffect(()=>{
       async function fetchData(){
         try{
-        const result = await fetchDataFromAPI( `https://api.rawg.io/api/games/662316?key=${apiKey}`)
+        const result = await fetchDataFromAPI( `https://api.rawg.io/api/games/${id}?key=${apiKey}`)
         setData([result])
         console.log(result)
         console.log('data: ',  data)
