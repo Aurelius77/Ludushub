@@ -1,17 +1,36 @@
 import Image from 'next/image'
 import { HeartIcon } from "@heroicons/react/24/solid";
 import { useState } from 'react';
+import { useGlobalState } from "../context/context"
+import { useRouter } from 'next/navigation';
+
+
 
 
 export default function SidebarCard({props, image, isShowing}){
+  const router = useRouter()
     const [isClicked, setIsClicked] = useState(false);
+    const {dispatch} = useGlobalState()
 
     function handleHeartClick(){
     setIsClicked(!isClicked)
   }
+
+  function setGameDataInGlobalState(platformId, name){
+    dispatch({
+      type: 'SET_DATA',
+      payload: {
+        gameId: platformId,
+        data: name,
+      },
+    });
+    router.push('/game')
+  };
+
+
     return (
         <>
-         <div className="border rounded-md shadow-lg mb-3">
+         <div className="border rounded-md shadow-lg mb-3" onClick={()=>setGameDataInGlobalState(props.id, props.name)}>
             <div className="rounded-md overflow-hidden relative">
               <img
                 src={props.image_background || image}

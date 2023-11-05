@@ -1,8 +1,12 @@
 import Image from 'next/image'
 import { HeartIcon } from "@heroicons/react/24/solid";
 import { useState } from 'react';
+import { useGlobalState } from '../context/context';
+import { useRouter } from 'next/navigation';
 
 export default function Card({props, isSelected, handleIconClick}){
+  const router = useRouter()
+  const {dispatch} = useGlobalState()
    const [isClicked, setIsClicked] = useState(false);
 
 function getPlatformImage(platformName) {
@@ -33,9 +37,20 @@ function handleHeartClick(){
   }
 }
 
+ function setGameDataInGlobalState(gameId, name){
+    dispatch({
+      type: 'SET_DATA',
+      payload: {
+        gameId: gameId,
+        data: name,
+      },
+    });
+    router.push('/game')
+  };
+
     return(
         <>
-      <div className="w-full md:w-1/2 lg:w-1/4 p-3">
+      <div className="w-full md:w-1/2 lg:w-1/4 p-3" onClick={()=>setGameDataInGlobalState(props.id, props.name)}>
   <div className="rounded-md shadow-md border border-gray-300 hover:shadow-lg hover:border-gray-400 transition-transform transform hover:scale-105">
     <div className="rounded-md overflow-hidden relative">
       <img
