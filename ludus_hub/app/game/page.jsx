@@ -46,7 +46,7 @@ export default function Game(){
   <div className="flex">
     <Sidebar visibility={visibility}/>
     {!visibility && data.length > 0 ? <div className="flex flex-col">
-      <div className="md:flex justify-between p-2">
+      <div className=" justify-between p-2">
         <div className="img-cont">
           <img src={data[0].background_image} alt='poster'></img>
         </div>
@@ -56,13 +56,13 @@ export default function Game(){
           <h1 className="mb-2">Available on this platforms:</h1>
           <div className="platforms flex mb-3">
             { data[0].parent_platforms.map((platform, index)=>{
-              return <p key={index} className="border p-1">{platform.platform.name}</p>
+              return <p key={index} className="border p-1 m-1">{platform.platform.name}</p>
             })}
           </div>
           <h1 className="mb-2">Genres:</h1>
           <div className="platforms flex mb-3">
             { data[0].genres.map((genre, index)=>{
-              return <p key={index} className="border p-1">{genre.name}</p>
+              return <p key={index} className="border p-1 m-1">{genre.name}</p>
             })}
           </div>
 
@@ -77,6 +77,7 @@ export default function Game(){
 
       <div className="extra-info ml-2">
          <h1 className="text-xl">{data[0].name} can be gotten from:</h1>
+  <div className =' flex'>
           {data[0].stores.map((store, index)=>{
             return <div key={index} className="w-full md:w-1/2 lg:w-1/4 p-3" onClick={()=>redirectUser(store.store.domain)}>
   <div className="rounded-md shadow-md border border-gray-300 hover:shadow-lg hover:border-gray-400 transition-transform transform hover:scale-105">
@@ -91,6 +92,7 @@ export default function Game(){
   </div>
 </div>
           })}
+          </div>
       </div>
 
     </div> 
