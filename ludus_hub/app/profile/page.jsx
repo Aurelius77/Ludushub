@@ -26,7 +26,7 @@ export default function Profile(){
         <div className="flex">
             <Sidebar visibility={visibility}/>
             {!visibility ? <div className="flex flex-col w-full">
-           <div className="flex justify-between w-full h-max">
+           <div className="flex flex-col md:flex-row justify-between w-full h-max">
              <div className="left flex flex-col p-3 ml-2">
                <Image src={spidey} width='100' height='100' alt='icon' className="rounded-full"/>
                <h1 className="text-2xl">Aurelius</h1>
