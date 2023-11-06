@@ -21,8 +21,6 @@ export default function Game(){
         try{
         const result = await fetchDataFromAPI( `https://api.rawg.io/api/games/${id}?key=${apiKey}`)
         setData([result])
-        console.log(result)
-        console.log('data: ',  data)
         }
         catch(err){
           console.log(err)
@@ -51,7 +49,10 @@ export default function Game(){
           <img src={data[0].background_image} alt='poster'></img>
         </div>
         <div className="game-info flex flex-col md:p-2">
+          <div className="mb-3 mt-3 flex flex-col md:flex-row justify-between items-center">
           <h1 className="text-2xl mb-2 mt-2 md:mt-0">{data[0].name}</h1>
+          <button className=" mt-3 mb-3 cursor-pointer bg-red-500 text-white p-3 rounded-md md:mt-0 md:mb-0 ">Add to favourites</button>
+          </div>
           <p className="mb-2">{data[0].description_raw}</p>
           <h1 className="mb-2">Available on this platforms:</h1>
           <div className="platforms flex mb-3">
@@ -69,7 +70,7 @@ export default function Game(){
           <h1 className="mb-2">Developed by:</h1>
           <div className="platforms flex mb-3">
             { data[0].developers.map((developer, index)=>{
-              return <p key={index} className="border p-1">{developer.name}</p>
+              return <p key={index} className="border p-1 m-1">{developer.name}</p>
             })}
           </div>
         </div>
@@ -77,7 +78,7 @@ export default function Game(){
 
       <div className="extra-info ml-2">
          <h1 className="text-xl">{data[0].name} can be gotten from:</h1>
-  <div className =' flex'>
+  <div className =' flex  flex-wrap'>
           {data[0].stores.map((store, index)=>{
             return <div key={index} className="w-full md:w-1/2 lg:w-1/4 p-3" onClick={()=>redirectUser(store.store.domain)}>
   <div className="rounded-md shadow-md border border-gray-300 hover:shadow-lg hover:border-gray-400 transition-transform transform hover:scale-105">
